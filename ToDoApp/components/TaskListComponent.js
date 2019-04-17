@@ -9,15 +9,12 @@ export default class TaskListComponent extends Component {
             <FlatList 
                 data = {this.props.tasks}
                 renderItem = {
-                    ({ item, index }) => {
+                    ({ item }) => {
                         return(
-                            <TaskItemContainer {...item}>
-                            </TaskItemContainer>
+                            <TaskItemContainer {...item} />
                         );
                     }
-                }
-                keyExtractor = {({ item, index }) => {item.taskName}}>
-            </FlatList>
+                } />
         );
     }
 };
