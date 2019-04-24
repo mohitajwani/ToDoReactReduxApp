@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, 
         Platform, TouchableHighlight, RefreshControl, TextInput } from "react-native";
-import { addNewTask } from "../actions";
 
 export default class AddComponent extends Component {
     constructor(props) {
@@ -21,6 +20,7 @@ export default class AddComponent extends Component {
                 height: 64,
             }}>
                 <TextInput style = {{
+                        flex: 9,
                         height: 40,
                         width: 200,
                         margin: 10,
@@ -33,6 +33,7 @@ export default class AddComponent extends Component {
                     placeholderTextColor= 'white'
                     placeholder= "Enter task name"
                     autoCapitalize= 'none'
+                    value= {this.state.newTaskName}
                     onChangeText = {
                         (text) => {
                             this.setState({newTaskName: text});
@@ -41,13 +42,14 @@ export default class AddComponent extends Component {
                 />
 
                 <TouchableHighlight 
-                    style = {{marginRight: 10}}
-                    underlayColor = 'blue'
+                    style = {{marginRight: 10, flex: 1}}
+                    underlayColor = 'tomato'
                     onPress = {(event) => {
                         if (!this.state.newTaskName.trim()) {
                             return;
                         }
-                        this.props.onClickAdd(this.state.newTaskName);
+                        this.props.onClickAdd(this.props.tasks, this.state.newTaskName);
+                        this.setState({newTaskName: ""});
                     }}
                 >
                     <Image 

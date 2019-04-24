@@ -1,6 +1,8 @@
-import { ADD_NEW_TASK, TOGGLE_ONE_TASK } from "../actions/actionTypes";
+import { ADD_NEW_TASK, TOGGLE_ONE_TASK, LOAD_TASKS } from "../actions/actionTypes";
 
 const taskReducers = (tasks = [], action) => {
+    console.log("old state = ", tasks);
+    console.log("action = ", action);
     switch (action.type) {
 
         case ADD_NEW_TASK:
@@ -14,12 +16,15 @@ const taskReducers = (tasks = [], action) => {
             ]
 
         case TOGGLE_ONE_TASK:
-            return tasks.map(
+            return tasks.map( task => 
                 (task.taskId === action.taskId)
                     ? { ...task, completed: !task.completed }
                     : task
             )
     
+        case LOAD_TASKS:
+            return action.tasks;
+
         default:
             return tasks;
     }
